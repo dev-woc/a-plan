@@ -296,7 +296,7 @@ section:first-child { margin-top:0; }
       </div>
       <div class="metric">
         <div class="m-lbl">Monthly Burn</div>
-        <div class="m-val red">$3,012</div>
+        <div class="m-val red">$2,812</div>
         <div class="m-sub">Rent, car, food, bills</div>
       </div>
       <div class="metric">
@@ -394,12 +394,6 @@ section:first-child { margin-top:0; }
         <div class="b-status" style="color:var(--dim);">FIXED</div>
       </div>
       <div class="budget-row">
-        <div class="b-name"><strong>Partner Contrib.</strong><span>Planned transfer</span></div>
-        <div class="b-amount" style="color:var(--rose);">$200</div>
-        <div class="b-bar-wrap"><div class="b-bar" style="width:7%;background:var(--rose);"></div></div>
-        <div class="b-status" style="color:var(--dim);">PLANNED</div>
-      </div>
-      <div class="budget-row">
         <div class="b-name"><strong>Wifi (Spectrum)</strong><span>Fixed</span></div>
         <div class="b-amount" style="color:var(--mid);">$60</div>
         <div class="b-bar-wrap"><div class="b-bar" style="width:2%;background:var(--mid);"></div></div>
@@ -413,7 +407,7 @@ section:first-child { margin-top:0; }
       </div>
       <div style="padding:12px 0 0;border-top:1px solid var(--border);margin-top:4px;display:flex;justify-content:space-between;align-items:center;">
         <span style="font-size:13px;color:var(--mid);">Monthly total</span>
-        <span style="font-family:'Space Mono',monospace;font-size:18px;font-weight:700;color:var(--red);">$3,012</span>
+        <span style="font-family:'Space Mono',monospace;font-size:18px;font-weight:700;color:var(--red);">$2,812</span>
       </div>
     </div>
   </section>
@@ -433,12 +427,12 @@ section:first-child { margin-top:0; }
       <div class="input-row">
         <label>Monthly burn</label>
         <span class="prefix">$</span>
-        <input type="number" id="runway-burn" value="3012" oninput="updateRunway()">
+        <input type="number" id="runway-burn" value="2812" oninput="updateRunway()">
       </div>
       <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--border);">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
           <span style="font-size:13px;color:var(--mid);">Runway without Usher income</span>
-          <span id="runway-months" style="font-family:'Space Mono',monospace;font-size:18px;font-weight:700;color:var(--gold);">6.2 mo</span>
+          <span id="runway-months" style="font-family:'Space Mono',monospace;font-size:18px;font-weight:700;color:var(--gold);">6.7 mo</span>
         </div>
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
           <span style="font-size:13px;color:var(--mid);">Cash hits zero</span>
@@ -463,7 +457,7 @@ section:first-child { margin-top:0; }
       </div>
       <div style="display:flex;gap:16px;margin-top:12px;font-size:12px;color:var(--dim);flex-wrap:wrap;">
         <span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:2px;background:#6ba888;display:inline-block;"></span>Income + Usher Revenue</span>
-        <span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:2px;background:#b87070;display:inline-block;"></span>Expenses ($3,012/mo)</span>
+        <span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:2px;background:#b87070;display:inline-block;"></span>Expenses ($2,812/mo)</span>
         <span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:2px;background:#6a8fc4;display:inline-block;"></span>Jordan $13K (June 12)</span>
       </div>
     </div>
@@ -969,7 +963,7 @@ function toggleCheck(el) {
 
 function updateRunway() {
   const cash = parseFloat(document.getElementById('runway-cash').value) || 18738;
-  const burn = parseFloat(document.getElementById('runway-burn').value) || 3012;
+  const burn = parseFloat(document.getElementById('runway-burn').value) || 2812;
   const months = Math.round((cash / burn) * 10) / 10;
   document.getElementById('runway-months').textContent = months + ' mo';
   const zeroDate = new Date('2026-07-01');
@@ -996,7 +990,7 @@ new Chart(ctx, {
     labels: ['June', 'July', 'August'],
     datasets: [
       { label: 'Income + Usher', data: [7600, 2000, 6500], backgroundColor: '#6ba888', borderRadius: 3 },
-      { label: 'Expenses', data: [3012, 3012, 3012], backgroundColor: '#b87070', borderRadius: 3 },
+      { label: 'Expenses', data: [2812, 2812, 2812], backgroundColor: '#b87070', borderRadius: 3 },
       { label: 'Jordan $13K', data: [13000, 0, 0], backgroundColor: '#6a8fc4', borderRadius: 3 }
     ]
   },
