@@ -449,24 +449,69 @@ section:first-child { margin-top:0; }
   </section>
 
   <section>
-    <p class="section-label">Debt Snowball — Jordan</p>
-    <p class="section-title">Smallest balance first, roll &amp; repeat</p>
+    <p class="section-label">Dave Ramsey — Baby Steps</p>
+    <p class="section-title">The framework. In sequence.</p>
+    <div class="card" style="margin-bottom:28px;">
+      <div style="display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid #141414;">
+        <div style="width:22px;height:22px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;font-family:'Space Mono',monospace;font-size:10px;font-weight:700;color:#fff;">✓</div>
+        <div style="flex:1;"><div style="font-size:13px;color:var(--cream);">Step 1 — $1,000 Starter Emergency Fund</div><div style="font-size:11px;color:var(--dim);margin-top:2px;">Jordan has 18K+ in cash. Done.</div></div>
+        <span style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;color:var(--green);">DONE</span>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:12px;padding:12px;margin:6px -20px;background:rgba(184,151,90,0.06);border-top:1px solid rgba(184,151,90,0.2);border-bottom:1px solid rgba(184,151,90,0.2);">
+        <div style="width:22px;height:22px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;font-family:'Space Mono',monospace;font-size:10px;font-weight:700;color:#000;">2</div>
+        <div style="flex:1;"><div style="font-size:13px;color:var(--cream);">Step 2 — Debt Snowball (all non-mortgage debt)</div><div style="font-size:11px;color:var(--dim);margin-top:2px;">$50K to clear. Car ($20K) first, then student loans ($30K). Smallest balance first — not by rate.</div></div>
+        <span style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;color:var(--gold);">ACTIVE</span>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid #141414;opacity:0.45;">
+        <div style="width:22px;height:22px;border-radius:50%;border:1px solid #333;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;font-family:'Space Mono',monospace;font-size:10px;color:var(--dim);">3</div>
+        <div style="flex:1;"><div style="font-size:13px;color:var(--mid);">Step 3 — Full Emergency Fund (3–6 months)</div><div style="font-size:11px;color:var(--dim);margin-top:2px;">~$10,500–21,000 at current burn. After debt cleared.</div></div>
+        <span style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;color:var(--dim);">NEXT</span>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid #141414;opacity:0.35;">
+        <div style="width:22px;height:22px;border-radius:50%;border:1px solid #333;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;font-family:'Space Mono',monospace;font-size:10px;color:var(--dim);">4</div>
+        <div style="flex:1;"><div style="font-size:13px;color:var(--mid);">Step 4 — Invest 15% gross income in retirement</div><div style="font-size:11px;color:var(--dim);margin-top:2px;">15% of $141K = $21,150/yr. 401(k) to match → Roth IRA → back to 401(k).</div></div>
+        <span style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;color:var(--dim);">LATER</span>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:12px;padding:10px 0;opacity:0.25;">
+        <div style="width:22px;height:22px;border-radius:50%;border:1px solid #333;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;font-family:'Space Mono',monospace;font-size:10px;color:var(--dim);">5–7</div>
+        <div style="flex:1;"><div style="font-size:13px;color:var(--mid);">Steps 5–7 — College fund · Pay off home · Build wealth &amp; give</div><div style="font-size:11px;color:var(--dim);margin-top:2px;">The long game. Tackle in order after Step 4.</div></div>
+        <span style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;color:var(--dim);">LATER</span>
+      </div>
+    </div>
+
+    <p class="section-label" style="margin-top:0;">Step 2 — Debt Snowball</p>
+    <p class="section-title">Smallest balance first. Gazelle intensity.</p>
     <div class="card" style="margin-bottom:14px;">
-      <p class="tag gold" style="margin-bottom:14px;">Your Numbers</p>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
+        <div>
+          <p class="tag gold" style="margin-bottom:4px;">Monthly Extra Payment</p>
+          <p style="font-size:11px;color:var(--dim);">Above minimums — all of it to Car Loan first.</p>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span id="gazelle-label" style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--dim);text-transform:uppercase;">Gazelle Mode</span>
+          <div id="gazelle-toggle" onclick="toggleGazelle()" style="width:38px;height:22px;background:#222;border:1px solid #333;border-radius:11px;cursor:pointer;position:relative;transition:background .25s;">
+            <div id="gazelle-knob" style="width:16px;height:16px;border-radius:50%;background:var(--dim);position:absolute;top:2px;left:2px;transition:left .25s,background .25s;"></div>
+          </div>
+        </div>
+      </div>
+      <div id="gazelle-banner" style="display:none;background:rgba(184,151,90,0.1);border:1px solid rgba(184,151,90,0.3);padding:10px 14px;margin-bottom:14px;font-size:12px;color:var(--gold);line-height:1.6;">
+        <strong style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;">Gazelle Intensity</strong><br>
+        Cut everything to the bone. Every spare dollar attacks the car loan. Ramsey: <em>"Run like a gazelle from a cheetah."</em> Extra set to max viable based on $141K income.
+      </div>
       <div class="input-row">
-        <label>Monthly extra payment</label>
+        <label>Extra / month</label>
         <span class="prefix">$</span>
         <input type="number" id="sb-extra" value="1500" oninput="updateSnowball()">
       </div>
       <div class="two-col" style="margin-top:12px;gap:20px;">
         <div>
-          <p style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:10px;">Car Loan</p>
+          <p style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:10px;">Car Loan — Attack First</p>
           <div class="input-row"><label>Balance</label><span class="prefix">$</span><input type="number" id="sb-car-bal" value="20000" oninput="updateSnowball()"></div>
           <div class="input-row"><label>Rate (% /yr)</label><input type="number" id="sb-car-rate" value="7" step="0.1" oninput="updateSnowball()" style="width:80px;"><span style="font-size:12px;color:var(--dim);">%</span></div>
           <div class="input-row"><label>Min payment</label><span class="prefix">$</span><input type="number" id="sb-car-min" value="400" oninput="updateSnowball()"></div>
         </div>
         <div>
-          <p style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--blue);text-transform:uppercase;margin-bottom:10px;">Student Loans</p>
+          <p style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--blue);text-transform:uppercase;margin-bottom:10px;">Student Loans — Snowball Target</p>
           <div class="input-row"><label>Balance</label><span class="prefix">$</span><input type="number" id="sb-sl-bal" value="30000" oninput="updateSnowball()"></div>
           <div class="input-row"><label>Rate (% /yr)</label><input type="number" id="sb-sl-rate" value="5" step="0.1" oninput="updateSnowball()" style="width:80px;"><span style="font-size:12px;color:var(--dim);">%</span></div>
           <div class="input-row"><label>Min payment</label><span class="prefix">$</span><input type="number" id="sb-sl-min" value="300" oninput="updateSnowball()"></div>
@@ -488,8 +533,8 @@ section:first-child { margin-top:0; }
         <div class="prog-wrap"><div id="sb-car-bar" class="prog-fill" style="width:0%;background:var(--gold);transition:width .5s;"></div></div>
       </div>
 
-      <div style="text-align:center;padding:6px 0;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--dim);text-transform:uppercase;border-top:1px solid #141414;border-bottom:1px solid #141414;margin-bottom:20px;">
-        car paid → roll full payment into student loans ↓
+      <div style="text-align:center;padding:8px 0;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--dim);text-transform:uppercase;border-top:1px solid #141414;border-bottom:1px solid #141414;margin-bottom:20px;">
+        car paid → full payment rolls into student loans ↓
       </div>
 
       <div>
@@ -518,6 +563,9 @@ section:first-child { margin-top:0; }
           <div style="font-size:11px;color:var(--dim);margin-bottom:4px;">Interest saved</div>
           <div id="sb-interest-saved" style="font-family:'Space Mono',monospace;font-size:16px;font-weight:700;color:var(--green);"></div>
         </div>
+      </div>
+      <div style="margin-top:14px;padding-top:14px;border-top:1px solid #141414;font-size:11px;color:var(--dim);line-height:1.7;">
+        <strong style="color:var(--mid);">Ramsey rule:</strong> Smallest balance first — not highest rate. The math is slightly worse but the psychology wins. Every paid-off debt is a win that fuels the next one.
       </div>
     </div>
   </section>
@@ -1048,6 +1096,37 @@ function updateRunway() {
   const pct = Math.min(Math.round((1 / months) * 100), 100);
   document.getElementById('runway-bar').style.width = pct + '%';
   document.getElementById('runway-bar').style.background = pct > 60 ? 'var(--red)' : pct > 30 ? 'var(--gold)' : 'var(--green)';
+}
+
+let gazelleOn = false;
+function toggleGazelle() {
+  gazelleOn = !gazelleOn;
+  const toggle = document.getElementById('gazelle-toggle');
+  const knob = document.getElementById('gazelle-knob');
+  const label = document.getElementById('gazelle-label');
+  const banner = document.getElementById('gazelle-banner');
+  const input = document.getElementById('sb-extra');
+  if (gazelleOn) {
+    toggle.style.background = 'var(--gold)';
+    knob.style.left = '20px';
+    knob.style.background = '#000';
+    label.style.color = 'var(--gold)';
+    banner.style.display = 'block';
+    // Gazelle: take-home ~$8,300 minus bare essentials ~$2,500 = $5,800 max
+    input.value = 5000;
+    input.disabled = true;
+    input.style.opacity = '0.5';
+  } else {
+    toggle.style.background = '#222';
+    knob.style.left = '2px';
+    knob.style.background = 'var(--dim)';
+    label.style.color = 'var(--dim)';
+    banner.style.display = 'none';
+    input.disabled = false;
+    input.style.opacity = '1';
+    input.value = 1500;
+  }
+  updateSnowball();
 }
 
 function sbMonths(principal, monthlyRate, payment) {
