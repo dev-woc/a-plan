@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Summer Plan 2026</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap');
+@import url('https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css');
+
+:root {
+  --black: #080808; --cream: #f5f0e8; --gold: #b8975a; --rose: #c4816a;
+  --sage: #7a9e87; --blue: #6a8fc4; --card: #0f0f0f; --border: #1e1e1e;
+  --dim: #777; --mid: #aaa; --light: #e8e0d0; --green: #6ba888; --red: #b87070;
+  --purple: #8a7ac4;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--black); color:var(--cream); font-family:'DM Sans',sans-serif; }
+
+/* NAV */
+.nav { display:flex; gap:0; border-bottom:1px solid var(--border); overflow-x:auto; position:sticky; top:0; z-index:50; background:var(--black); }
+.nav button {
+  font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px;
+  text-transform:uppercase; color:var(--dim); background:none; border:none;
+  padding:14px 20px; cursor:pointer; white-space:nowrap; border-bottom:2px solid transparent;
+  transition:color .2s, border-color .2s;
+}
+.nav button.active { color:var(--gold); border-bottom-color:var(--gold); }
+.nav button:hover:not(.active) { color:var(--mid); }
+
+/* HERO */
+.hero {
+  padding:44px 28px 36px;
+  background:linear-gradient(180deg,#0d0a07 0%,var(--black) 100%);
+  border-bottom:1px solid rgba(184,151,90,0.2);
+}
+.eyebrow { font-family:'Space Mono',monospace; font-size:9px; letter-spacing:4px; color:var(--gold); text-transform:uppercase; margin-bottom:12px; }
+.hero h1 { font-family:'Cormorant Garamond',serif; font-weight:300; font-size:clamp(36px,8vw,60px); line-height:1.05; }
+.hero h1 em { color:var(--gold); font-style:italic; }
+.hero-meta { display:flex; gap:24px; margin-top:20px; flex-wrap:wrap; }
+.hero-stat { }
+.hero-stat .val { font-family:'Space Mono',monospace; font-size:20px; font-weight:700; color:var(--gold); }
+.hero-stat .lbl { font-size:11px; color:var(--dim); margin-top:2px; }
+
+/* PAGES */
+.page { display:none; padding:28px; max-width:800px; margin:0 auto; padding-bottom:60px; }
+.page.active { display:block; }
+
+/* UTIL */
+.section-label { font-family:'Space Mono',monospace; font-size:8px; letter-spacing:4px; color:var(--gold); text-transform:uppercase; margin-bottom:6px; }
+.section-title { font-family:'Cormorant Garamond',serif; font-size:clamp(22px,4vw,32px); font-weight:400; color:var(--cream); margin-bottom:18px; line-height:1.2; }
+section { margin-top:40px; }
+section:first-child { margin-top:0; }
+
+.card { background:var(--card); border:1px solid var(--border); padding:18px 20px; }
+.card.red-border { border-color:rgba(184,112,112,0.35); background:#110a0a; }
+.card.gold-border { border-color:rgba(184,151,90,0.35); background:#0d0a06; }
+.card.blue-border { border-color:rgba(106,143,196,0.3); background:#090d10; }
+.card.sage-border { border-color:rgba(122,158,135,0.3); background:#090d0a; }
+
+.tag { font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; }
+.tag.red { color:var(--red); } .tag.gold { color:var(--gold); }
+.tag.blue { color:var(--blue); } .tag.sage { color:var(--sage); }
+.tag.purple { color:var(--purple); }
+
+.two-col { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.three-col { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+.four-col { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+
+/* BUDGET TRACKER */
+.metric-cards { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-bottom:24px; }
+.metric { background:#0f0f0f; border:1px solid var(--border); padding:14px 16px; }
+.metric .m-lbl { font-size:11px; color:var(--dim); margin-bottom:6px; }
+.metric .m-val { font-family:'Space Mono',monospace; font-size:18px; font-weight:700; }
+.metric .m-val.gold { color:var(--gold); } .metric .m-val.green { color:var(--green); }
+.metric .m-val.red { color:var(--red); } .metric .m-val.mid { color:var(--mid); }
+.metric .m-sub { font-size:10px; color:var(--dim); margin-top:4px; }
+
+.budget-row { display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid #141414; }
+.budget-row:last-child { border-bottom:none; }
+.budget-row .b-name { flex:1; font-size:13px; color:var(--mid); }
+.budget-row .b-name strong { color:var(--cream); display:block; font-size:13px; }
+.budget-row .b-name span { font-size:11px; color:var(--dim); }
+.budget-row .b-amount { font-family:'Space Mono',monospace; font-size:13px; font-weight:700; min-width:80px; text-align:right; }
+.budget-row .b-bar-wrap { flex:2; height:4px; background:#1a1a1a; border-radius:2px; overflow:hidden; }
+.budget-row .b-bar { height:100%; border-radius:2px; transition:width .4s ease; }
+.budget-row .b-status { min-width:70px; text-align:right; font-size:11px; font-family:'Space Mono',monospace; letter-spacing:1px; }
+
+/* PROGRESS BARS */
+.prog-wrap { background:#1a1a1a; height:6px; border-radius:3px; overflow:hidden; margin-top:8px; }
+.prog-fill { height:100%; border-radius:3px; transition:width .5s ease; }
+
+/* INPUT ROWS */
+.input-row { display:flex; align-items:center; gap:10px; margin-bottom:8px; }
+.input-row label { font-size:12px; color:var(--dim); min-width:130px; }
+.input-row input {
+  background:#111; border:1px solid var(--border); color:var(--cream);
+  padding:6px 10px; font-family:'Space Mono',monospace; font-size:12px;
+  width:120px; outline:none;
+}
+.input-row input:focus { border-color:var(--gold); }
+.input-row .prefix { font-size:12px; color:var(--dim); }
+
+/* MILESTONE TIMELINE */
+.ms-list { position:relative; padding-left:24px; }
+.ms-list::before { content:''; position:absolute; left:7px; top:8px; bottom:8px; width:1px; background:rgba(184,151,90,0.2); }
+.ms-item { position:relative; margin-bottom:18px; display:flex; gap:14px; align-items:flex-start; }
+.ms-dot { width:14px; height:14px; border-radius:50%; margin-left:-24px; margin-top:3px; flex-shrink:0; border:2px solid var(--black); }
+.ms-dot.gold { background:var(--gold); }
+.ms-dot.green { background:var(--green); }
+.ms-dot.red { background:var(--red); }
+.ms-dot.blue { background:var(--blue); }
+.ms-dot.dim { background:#333; }
+.ms-content { flex:1; }
+.ms-date { font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; color:var(--dim); text-transform:uppercase; margin-bottom:4px; }
+.ms-title { font-size:14px; color:var(--cream); margin-bottom:3px; }
+.ms-body { font-size:12px; color:var(--dim); line-height:1.6; }
+.ms-amount { font-family:'Space Mono',monospace; font-size:14px; font-weight:700; color:var(--green); }
+
+/* PERSON COLS */
+.person-header { font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; margin-bottom:12px; padding-bottom:8px; border-bottom:1px solid var(--border); }
+.person-header.ashley { color:var(--rose); border-color:rgba(196,129,106,0.3); }
+.person-header.jordan { color:var(--blue); border-color:rgba(106,143,196,0.3); }
+.task-list { list-style:none; }
+.task-list li { font-size:12px; color:var(--mid); padding:6px 0 6px 16px; position:relative; line-height:1.5; border-bottom:1px solid #141414; }
+.task-list li:last-child { border-bottom:none; }
+.task-list li::before { content:''; position:absolute; left:0; top:12px; width:5px; height:5px; border-radius:50%; }
+.task-list.ashley li::before { background:var(--rose); }
+.task-list.jordan li::before { background:var(--blue); }
+.task-list li strong { color:var(--light); }
+
+/* SCORE RING */
+.score-row { display:flex; align-items:center; gap:14px; padding:10px 0; border-bottom:1px solid #141414; }
+.score-row:last-child { border-bottom:none; }
+.score-row .s-label { flex:1; font-size:13px; color:var(--mid); }
+.score-row .s-label strong { color:var(--cream); display:block; }
+.score-row .s-bar { flex:2; }
+.score-row .s-pct { font-family:'Space Mono',monospace; font-size:12px; font-weight:700; min-width:36px; text-align:right; }
+
+/* CHECKLIST */
+.check-item { display:flex; align-items:flex-start; gap:10px; padding:8px 0; border-bottom:1px solid #141414; cursor:pointer; }
+.check-item:last-child { border-bottom:none; }
+.check-box { width:16px; height:16px; border:1px solid #444; border-radius:3px; flex-shrink:0; margin-top:2px; display:flex; align-items:center; justify-content:center; transition:background .2s, border-color .2s; }
+.check-box.done { background:var(--green); border-color:var(--green); }
+.check-label { font-size:13px; color:var(--mid); line-height:1.5; flex:1; }
+.check-label strong { color:var(--cream); display:block; font-size:13px; }
+.check-item.done-item .check-label { text-decoration:line-through; opacity:0.5; }
+
+/* CHART */
+.chart-wrap { position:relative; height:220px; margin-top:16px; }
+
+/* TABLE */
+.data-table { width:100%; border-collapse:collapse; font-size:12px; }
+.data-table th { font-family:'Space Mono',monospace; font-size:9px; letter-spacing:2px; color:var(--dim); text-transform:uppercase; text-align:left; padding:8px 10px; border-bottom:1px solid var(--border); }
+.data-table td { padding:10px 10px; border-bottom:1px solid #141414; color:var(--mid); }
+.data-table td strong { color:var(--cream); }
+.data-table tr:last-child td { border-bottom:none; }
+.data-table .td-amount { font-family:'Space Mono',monospace; font-weight:700; }
+.status-pill { font-family:'Space Mono',monospace; font-size:9px; letter-spacing:1px; text-transform:uppercase; padding:3px 8px; border-radius:10px; }
+.status-pill.active { background:rgba(107,168,136,0.15); color:var(--green); }
+.status-pill.pending { background:rgba(184,151,90,0.15); color:var(--gold); }
+.status-pill.blocked { background:rgba(184,112,112,0.15); color:var(--red); }
+
+@media(max-width:560px){ .two-col,.three-col,.four-col,.metric-cards{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <p class="eyebrow">Summer 2026 Master Plan</p>
+  <h1>Ashley &amp; Jordan — <em>the full scope.</em></h1>
+  <div class="hero-meta">
+    <div class="hero-stat"><div class="val">$0</div><div class="lbl">Earned so far</div></div>
+    <div class="hero-stat"><div class="val" id="days-left">—</div><div class="lbl">Days until Aug 1</div></div>
+    <div class="hero-stat"><div class="val">2</div><div class="lbl">Platforms to launch</div></div>
+    <div class="hero-stat"><div class="val">3</div><div class="lbl">Licenses needed</div></div>
+  </div>
+</div>
+
+<nav class="nav">
+  <button class="active" onclick="showPage('overview',this)">Overview</button>
+  <button onclick="showPage('budget',this)">Budget</button>
+  <button onclick="showPage('revenue',this)">Revenue</button>
+  <button onclick="showPage('career',this)">Career</button>
+  <button onclick="showPage('apartment',this)">Apartment</button>
+  <button onclick="showPage('milestones',this)">Milestones</button>
+  <button onclick="showPage('calendar',this)">Calendar</button>
+</nav>
+
+<!-- OVERVIEW -->
+<div class="page active" id="page-overview">
+
+  <section>
+    <p class="section-label">The Clock</p>
+    <p class="section-title">What's running right now</p>
+    <div class="card red-border" style="margin-bottom:14px;">
+      <p class="tag red" style="margin-bottom:8px;">⚡ Immediate</p>
+      <p style="font-size:13px; color:var(--mid); line-height:1.7;">School ends <strong style="color:var(--cream);">this Friday.</strong> Ashley's runway is one more month. <strong style="color:var(--cream);">Usher must earn before July.</strong> Debug → bid → pipeline → revenue. That sequence starts now.</p>
+    </div>
+    <div class="three-col">
+      <div class="card">
+        <p class="tag gold" style="margin-bottom:8px;">June</p>
+        <p style="font-size:13px; color:var(--cream); margin-bottom:4px;">Debug &amp; Launch</p>
+        <p style="font-size:12px; color:var(--dim); line-height:1.6;">Usher bids go out. Class Pulse debugged. Jordan's $13K lands June 12.</p>
+      </div>
+      <div class="card">
+        <p class="tag gold" style="margin-bottom:8px;">July</p>
+        <p style="font-size:13px; color:var(--cream); margin-bottom:4px;">Revenue + Licenses</p>
+        <p style="font-size:12px; color:var(--dim); line-height:1.6;">Usher earning. Ashley sits FL exams. Both job searches active.</p>
+      </div>
+      <div class="card">
+        <p class="tag gold" style="margin-bottom:8px;">August</p>
+        <p style="font-size:13px; color:var(--cream); margin-bottom:4px;">The New Chapter</p>
+        <p style="font-size:12px; color:var(--dim); line-height:1.6;">New lease signed. She's in it. Licensed in two states. Chapter starts.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="section-label">Plan Score</p>
+    <p class="section-title">How complete each track is</p>
+    <div class="card">
+      <div class="score-row">
+        <div class="s-label"><strong>Revenue (Usher)</strong>Platform debugged &amp; bidding</div>
+        <div class="s-bar"><div class="prog-wrap"><div class="prog-fill" style="width:15%;background:var(--red);"></div></div></div>
+        <div class="s-pct" style="color:var(--red);">15%</div>
+      </div>
+      <div class="score-row">
+        <div class="s-label"><strong>Revenue (Class Pulse)</strong>Debug, UF submit, marketplaces</div>
+        <div class="s-bar"><div class="prog-wrap"><div class="prog-fill" style="width:20%;background:var(--gold);"></div></div></div>
+        <div class="s-pct" style="color:var(--gold);">20%</div>
+      </div>
+      <div class="score-row">
+        <div class="s-label"><strong>Ashley — Licensing</strong>FL exams scheduled &amp; sat</div>
+        <div class="s-bar"><div class="prog-wrap"><div class="prog-fill" style="width:10%;background:var(--red);"></div></div></div>
+        <div class="s-pct" style="color:var(--red);">10%</div>
+      </div>
+      <div class="score-row">
+        <div class="s-label"><strong>Jordan — Job Search</strong>Forward deploy pipeline active</div>
+        <div class="s-bar"><div class="prog-wrap"><div class="prog-fill" style="width:25%;background:var(--gold);"></div></div></div>
+        <div class="s-pct" style="color:var(--gold);">25%</div>
+      </div>
+      <div class="score-row">
+        <div class="s-label"><strong>Apartment Hunt</strong>Shortlists built, lease signed</div>
+        <div class="s-bar"><div class="prog-wrap"><div class="prog-fill" style="width:5%;background:var(--dim);"></div></div></div>
+        <div class="s-pct" style="color:var(--dim);">5%</div>
+      </div>
+      <div class="score-row">
+        <div class="s-label"><strong>Budget / Finances</strong>Tracked, milestones hit</div>
+        <div class="s-bar"><div class="prog-wrap"><div class="prog-fill" style="width:0%;background:var(--dim);"></div></div></div>
+        <div class="s-pct" style="color:var(--dim);">0%</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="section-label">Checklist — This Week</p>
+    <p class="section-title">Before Friday</p>
+    <div class="card" id="checklist">
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-label"><strong>Ashley starts debugging Usher</strong>Jordan guides in real-time — not fixing it for her, teaching her through it</div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-label"><strong>Identify 3 active gov-con solicitations</strong>Research SAM.gov or similar for current opportunities to bid</div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-label"><strong>Jordan begins LinkedIn bot assembly</strong>Ashley builds it, he advises — her understanding of the tool = better output</div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-label"><strong>Look up FL licensing exam registration</strong>Know the dates, fees, and requirements before July crunch hits</div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-label"><strong>Set up shared budget tracker</strong>Both people can see current cash position, burn rate, and milestones</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- BUDGET -->
+<div class="page" id="page-budget">
+
+  <section>
+    <p class="section-label">Budget Tracker</p>
+    <p class="section-title">Cash position &amp; runway</p>
+    <div class="metric-cards">
+      <div class="metric">
+        <div class="m-lbl">Ashley — Monthly Expenses</div>
+        <div class="m-val red" id="a-expenses-display">$2,200</div>
+        <div class="m-sub">Rent, food, bills</div>
+      </div>
+      <div class="metric">
+        <div class="m-lbl">Jordan — Monthly Budget</div>
+        <div class="m-val gold" id="j-budget-display">$2,000</div>
+        <div class="m-sub">Lease target</div>
+      </div>
+      <div class="metric">
+        <div class="m-lbl">June 12 Deposit</div>
+        <div class="m-val green">$13,000</div>
+        <div class="m-sub">Jordan's incoming</div>
+      </div>
+      <div class="metric">
+        <div class="m-lbl">Runway (Ashley)</div>
+        <div class="m-val mid" id="runway-display">~1 mo</div>
+        <div class="m-sub">Before Usher must earn</div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:20px;">
+      <p class="tag gold" style="margin-bottom:14px;">Adjust Numbers</p>
+      <div class="input-row">
+        <label>Ashley monthly expenses</label>
+        <span class="prefix">$</span>
+        <input type="number" id="a-expenses" value="2200" oninput="updateBudget()">
+      </div>
+      <div class="input-row">
+        <label>Ashley savings / runway</label>
+        <span class="prefix">$</span>
+        <input type="number" id="a-savings" value="2200" oninput="updateBudget()">
+      </div>
+      <div class="input-row">
+        <label>Jordan lease budget / mo</label>
+        <span class="prefix">$</span>
+        <input type="number" id="j-budget" value="2000" oninput="updateBudget()">
+      </div>
+      <div class="input-row">
+        <label>Usher revenue target / mo</label>
+        <span class="prefix">$</span>
+        <input type="number" id="usher-target" value="3000" oninput="updateBudget()">
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="section-label">Monthly Expense Breakdown</p>
+    <p class="section-title">Where money goes</p>
+    <div class="card">
+      <div class="budget-row">
+        <div class="b-name"><strong>Rent</strong><span>Ashley's current place</span></div>
+        <div class="b-amount" style="color:var(--red);">$1,200</div>
+        <div class="b-bar-wrap"><div class="b-bar" style="width:55%;background:var(--red);"></div></div>
+        <div class="b-status" style="color:var(--red);">CRITICAL</div>
+      </div>
+      <div class="budget-row">
+        <div class="b-name"><strong>Food / Groceries</strong><span>Estimated</span></div>
+        <div class="b-amount" style="color:var(--gold);">$450</div>
+        <div class="b-bar-wrap"><div class="b-bar" style="width:20%;background:var(--gold);"></div></div>
+        <div class="b-status" style="color:var(--gold);">MONTHLY</div>
+      </div>
+      <div class="budget-row">
+        <div class="b-name"><strong>Utilities / Phone</strong><span>Estimated</span></div>
+        <div class="b-amount" style="color:var(--gold);">$200</div>
+        <div class="b-bar-wrap"><div class="b-bar" style="width:9%;background:var(--gold);"></div></div>
+        <div class="b-status" style="color:var(--gold);">MONTHLY</div>
+      </div>
+      <div class="budget-row">
+        <div class="b-name"><strong>FL License Exams</strong><span>2 exams — one-time</span></div>
+        <div class="b-amount" style="color:var(--blue);">$300</div>
+        <div class="b-bar-wrap"><div class="b-bar" style="width:14%;background:var(--blue);"></div></div>
+        <div class="b-status" style="color:var(--blue);">ONE-TIME</div>
+      </div>
+      <div class="budget-row">
+        <div class="b-name"><strong>Move / Deposit</strong><span>New lease in August</span></div>
+        <div class="b-amount" style="color:var(--purple);">$5,400</div>
+        <div class="b-bar-wrap"><div class="b-bar" style="width:100%;background:var(--purple);"></div></div>
+        <div class="b-status" style="color:var(--purple);">AUG</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="section-label">Revenue vs. Expenses</p>
+    <p class="section-title">June → August projection</p>
+    <div class="card">
+      <div class="chart-wrap">
+        <canvas id="budgetChart" role="img" aria-label="Bar chart comparing projected revenue vs expenses for June, July, August">Revenue vs expenses projection June through August.</canvas>
+      </div>
+      <div style="display:flex;gap:16px;margin-top:12px;font-size:12px;color:var(--dim);flex-wrap:wrap;">
+        <span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:2px;background:#6ba888;display:inline-block;"></span>Revenue (Usher + Pulse)</span>
+        <span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:2px;background:#b87070;display:inline-block;"></span>Expenses</span>
+        <span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:2px;background:#6a8fc4;display:inline-block;"></span>Jordan $13K (June 12)</span>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- REVENUE -->
+<div class="page" id="page-revenue">
+
+  <section>
+    <p class="section-label">Revenue Platforms</p>
+    <p class="section-title">Two channels. One July deadline.</p>
+    <div class="two-col" style="margin-bottom:20px;">
+      <div class="card red-border">
+        <p class="tag red" style="margin-bottom:10px;">🔴 Priority — July 1 deadline</p>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--cream);margin-bottom:8px;">Usher</p>
+        <p style="font-size:12px;color:var(--dim);line-height:1.7;margin-bottom:12px;">Gov-con bid platform. Ashley builds the bots and runs the pipeline. Jordan guides and eventually takes over maintenance.</p>
+        <div class="prog-wrap"><div class="prog-fill" style="width:15%;background:var(--red);"></div></div>
+        <p style="font-size:11px;color:var(--dim);margin-top:6px;">15% complete</p>
+      </div>
+      <div class="card gold-border">
+        <p class="tag gold" style="margin-bottom:10px;">July–August window</p>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--cream);margin-bottom:8px;">Class Pulse</p>
+        <p style="font-size:12px;color:var(--dim);line-height:1.7;margin-bottom:12px;">EdTech tool for homeschool market + UF research. Summer is peak season. Window closes in September.</p>
+        <div class="prog-wrap"><div class="prog-fill" style="width:20%;background:var(--gold);"></div></div>
+        <p style="font-size:11px;color:var(--dim);margin-top:6px;">20% complete</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="section-label">Pipeline Tasks</p>
+    <p class="section-title">What needs to happen</p>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Task</th><th>Platform</th><th>Owner</th><th>Deadline</th><th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Debug platform</strong></td><td style="color:var(--red);">Usher</td><td style="color:var(--rose);">Ashley</td><td>June 10</td><td><span class="status-pill active">Active</span></td></tr>
+        <tr><td><strong>Identify solicitations on SAM.gov</strong></td><td style="color:var(--red);">Usher</td><td style="color:var(--rose);">Ashley</td><td>June 14</td><td><span class="status-pill active">Active</span></td></tr>
+        <tr><td><strong>Submit first bids</strong></td><td style="color:var(--red);">Usher</td><td style="color:var(--rose);">Ashley</td><td>June 25</td><td><span class="status-pill pending">Pending</span></td></tr>
+
+        <tr><td><strong>Debug &amp; stabilize</strong></td><td style="color:var(--gold);">Class Pulse</td><td style="color:var(--rose);">Ashley</td><td>June 20</td><td><span class="status-pill pending">Pending</span></td></tr>
+        <tr><td><strong>Submit to UF research</strong></td><td style="color:var(--gold);">Class Pulse</td><td style="color:var(--rose);">Ashley</td><td>July 10</td><td><span class="status-pill pending">Pending</span></td></tr>
+        <tr><td><strong>Upload to homeschool marketplaces</strong></td><td style="color:var(--gold);">Class Pulse</td><td style="color:var(--rose);">Ashley</td><td>July 15</td><td><span class="status-pill pending">Pending</span></td></tr>
+        <tr><td><strong>Jordan takes over maintenance</strong></td><td style="color:var(--mid);">Both</td><td style="color:var(--blue);">Jordan</td><td>Aug 1</td><td><span class="status-pill blocked">Later</span></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <p class="section-label">Revenue Targets</p>
+    <p class="section-title">Month-by-month goals</p>
+    <div class="card">
+      <div class="budget-row">
+        <div class="b-name"><strong>June — Usher first bid win</strong><span>Conservative first contract</span></div>
+        <div class="b-amount" style="color:var(--gold);">$2,000</div>
+        <div class="b-bar-wrap"><div class="b-bar" style="width:0%;background:var(--gold);"></div></div>
+        <div class="b-status" style="color:var(--dim);">TARGET</div>
+      </div>
+      <div class="budget-row">
+        <div class="b-name"><strong>July — Usher pipeline active</strong><span>Multiple bids, recurring agents</span></div>
+        <div class="b-amount" style="color:var(--green);">$5,000</div>
+        <div class="b-bar-wrap"><div class="b-bar" style="width:0%;background:var(--green);"></div></div>
+        <div class="b-status" style="color:var(--dim);">TARGET</div>
+      </div>
+      <div class="budget-row">
+        <div class="b-name"><strong>July — Class Pulse sales</strong><span>Homeschool + UF research</span></div>
+        <div class="b-amount" style="color:var(--green);">$1,500</div>
+        <div class="b-bar-wrap"><div class="b-bar" style="width:0%;background:var(--green);"></div></div>
+        <div class="b-status" style="color:var(--dim);">TARGET</div>
+      </div>
+      <div class="budget-row">
+        <div class="b-name"><strong>August — Combined run rate</strong><span>Both platforms stable</span></div>
+        <div class="b-amount" style="color:var(--green);">$8,000</div>
+        <div class="b-bar-wrap"><div class="b-bar" style="width:0%;background:var(--green);"></div></div>
+        <div class="b-status" style="color:var(--dim);">TARGET</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- CAREER -->
+<div class="page" id="page-career">
+
+  <section>
+    <p class="section-label">Career Tracks</p>
+    <p class="section-title">Both moving in parallel</p>
+    <div class="two-col">
+      <div>
+        <div class="person-header ashley">Ashley — Teaching + Licensing</div>
+        <ul class="task-list ashley">
+          <li><strong>FL Virtual Schools</strong> — apply before August transition window</li>
+          <li><strong>MA Virtual Schools</strong> — parallel track for BOS path</li>
+          <li><strong>FL License Exam 1</strong> — schedule for July</li>
+          <li><strong>FL License Exam 2</strong> — schedule for July</li>
+          <li><strong>MA License Transfer</strong> — after FL license in hand</li>
+          <li>Target: <strong>licensed in both states before August</strong></li>
+        </ul>
+      </div>
+      <div>
+        <div class="person-header jordan">Jordan — Engineering + AI</div>
+        <ul class="task-list jordan">
+          <li><strong>Forward Deploy Engineer</strong> — remote, primary target</li>
+          <li><strong>LinkedIn outreach bot</strong> — automate pipeline at scale</li>
+          <li><strong>Subcontract via Usher</strong> — clearance is a direct asset</li>
+          <li><strong>Defense-tech remote roles</strong> — $150K–$230K range</li>
+          <li><strong>AI Engineering pivot</strong> — LangGraph + RAG portfolio live</li>
+          <li>Target: <strong>active offer pipeline by August</strong></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="section-label">License Tracker</p>
+    <p class="section-title">Ashley's credentialing path</p>
+    <div class="card">
+      <div class="budget-row">
+        <div class="b-name"><strong>FL Exam 1 — Schedule</strong><span>Find date, pay fee, register</span></div>
+        <div class="b-amount" style="color:var(--gold);">~$150</div>
+        <div class="b-bar-wrap"><div class="b-bar" style="width:0%;background:var(--red);"></div></div>
+        <div class="b-status" style="color:var(--red);">NOT STARTED</div>
+      </div>
+      <div class="budget-row">
+        <div class="b-name"><strong>FL Exam 2 — Schedule</strong><span>Find date, pay fee, register</span></div>
+        <div class="b-amount" style="color:var(--gold);">~$150</div>
+        <div class="b-bar-wrap"><div class="b-bar" style="width:0%;background:var(--red);"></div></div>
+        <div class="b-status" style="color:var(--red);">NOT STARTED</div>
+      </div>
+      <div class="budget-row">
+        <div class="b-name"><strong>FL License — Issued</strong><span>After both exams passed</span></div>
+        <div class="b-amount" style="color:var(--dim);">—</div>
+        <div class="b-bar-wrap"><div class="b-bar" style="width:0%;background:var(--dim);"></div></div>
+        <div class="b-status" style="color:var(--dim);">WAITING</div>
+      </div>
+      <div class="budget-row">
+        <div class="b-name"><strong>MA License Transfer</strong><span>Submit FL license to MA DESE</span></div>
+        <div class="b-amount" style="color:var(--dim);">~$100</div>
+        <div class="b-bar-wrap"><div class="b-bar" style="width:0%;background:var(--dim);"></div></div>
+        <div class="b-status" style="color:var(--dim);">WAITING</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- APARTMENT -->
+<div class="page" id="page-apartment">
+
+  <section>
+    <p class="section-label">August Lease</p>
+    <p class="section-title">Where they land together</p>
+    <div class="card blue-border" style="margin-bottom:20px;">
+      <p style="font-size:13px;color:var(--mid);line-height:1.7;">Jordan signs a new lease in August regardless. <strong style="color:var(--cream);">$2,000/month is his base budget.</strong> Search runs in parallel — BOS if she comes to him, MIA if they're positioning for FL. Both markets watched now so August isn't a scramble.</p>
+    </div>
+    <div class="two-col">
+      <div class="card">
+        <p class="tag blue" style="margin-bottom:10px;">Option A — Boston</p>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--cream);margin-bottom:6px;">East Boston / Waterfront</p>
+        <div style="font-family:'Space Mono',monospace;font-size:22px;font-weight:700;color:var(--gold);margin-bottom:12px;">~$2,700<span style="font-size:12px;color:var(--dim);font-weight:400;">/mo</span></div>
+        <p style="font-size:11px;color:var(--dim);margin-bottom:10px;line-height:1.6;">Slightly above his $2K base — worth a conversation. Highrises in this range are real. Near universities, transit, waterfront.</p>
+        <ul style="list-style:none;">
+          <li style="font-size:11px;color:var(--mid);padding:3px 0;">✓ 2+ BD / 2 BA</li>
+          <li style="font-size:11px;color:var(--mid);padding:3px 0;">✓ Highrise or private owner</li>
+          <li style="font-size:11px;color:var(--mid);padding:3px 0;">✓ Walkable, transit-close</li>
+          <li style="font-size:11px;color:var(--mid);padding:3px 0;">✓ Near universities</li>
+        </ul>
+      </div>
+      <div class="card">
+        <p class="tag rose" style="margin-bottom:10px;color:var(--rose);">Option B — Miami</p>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--cream);margin-bottom:6px;">Edgewater / Brickell / Midtown</p>
+        <div style="font-family:'Space Mono',monospace;font-size:22px;font-weight:700;color:var(--gold);margin-bottom:12px;">~$2,700<span style="font-size:12px;color:var(--dim);font-weight:400;">/mo</span></div>
+        <p style="font-size:11px;color:var(--dim);margin-bottom:10px;line-height:1.6;">Competitive but available. Summer leases move faster here — start looking early. Metrorail, FIU, UM nearby.</p>
+        <ul style="list-style:none;">
+          <li style="font-size:11px;color:var(--mid);padding:3px 0;">✓ 2+ BD / 2 BA</li>
+          <li style="font-size:11px;color:var(--mid);padding:3px 0;">✓ Highrise preferred</li>
+          <li style="font-size:11px;color:var(--mid);padding:3px 0;">✓ Metrorail access</li>
+          <li style="font-size:11px;color:var(--mid);padding:3px 0;">✓ Near FIU / UM / MDC</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="section-label">Move-In Costs</p>
+    <p class="section-title">What August actually costs</p>
+    <div class="card">
+      <div class="budget-row">
+        <div class="b-name"><strong>First Month Rent</strong><span>At $2,700</span></div>
+        <div class="b-amount" style="color:var(--gold);">$2,700</div>
+        <div class="b-bar-wrap"><div class="b-bar" style="width:50%;background:var(--gold);"></div></div>
+        <div class="b-status" style="color:var(--gold);">AUGUST</div>
+      </div>
+      <div class="budget-row">
+        <div class="b-name"><strong>Security Deposit</strong><span>Typically 1–2 months</span></div>
+        <div class="b-amount" style="color:var(--gold);">$2,700</div>
+        <div class="b-bar-wrap"><div class="b-bar" style="width:50%;background:var(--gold);"></div></div>
+        <div class="b-status" style="color:var(--gold);">AUGUST</div>
+      </div>
+      <div class="budget-row">
+        <div class="b-name"><strong>Moving Costs</strong><span>Estimated — varies by distance</span></div>
+        <div class="b-amount" style="color:var(--mid);">$500–2K</div>
+        <div class="b-bar-wrap"><div class="b-bar" style="width:20%;background:var(--mid);"></div></div>
+        <div class="b-status" style="color:var(--mid);">VARIABLE</div>
+      </div>
+      <div style="padding:12px 0 0; border-top:1px solid var(--border);margin-top:8px;display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-size:13px;color:var(--mid);">Total move-in estimate</span>
+        <span style="font-family:'Space Mono',monospace;font-size:18px;font-weight:700;color:var(--green);">$5,900–7,400</span>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- MILESTONES -->
+<div class="page" id="page-milestones">
+
+  <section>
+    <p class="section-label">Finance Milestones</p>
+    <p class="section-title">The money sequence</p>
+    <div class="ms-list">
+      <div class="ms-item">
+        <div class="ms-dot red"></div>
+        <div class="ms-content">
+          <div class="ms-date">Now — This Week</div>
+          <div class="ms-title">Ashley's runway clock starts</div>
+          <div class="ms-body">School ends Friday. One month of covered expenses. The sequence must start now or the gap opens. Debug → bid → revenue is not optional.</div>
+        </div>
+      </div>
+      <div class="ms-item">
+        <div class="ms-dot gold"></div>
+        <div class="ms-content">
+          <div class="ms-date">June 12</div>
+          <div class="ms-title" style="display:flex;align-items:center;gap:10px;">Jordan's $13K deposit lands <div class="ms-amount">+$13,000</div></div>
+          <div class="ms-body">Pre-approval for FL property kicks off the same week. First real capital event of the summer — this funds the move and gives options.</div>
+        </div>
+      </div>
+      <div class="ms-item">
+        <div class="ms-dot gold"></div>
+        <div class="ms-content">
+          <div class="ms-date">June 25</div>
+          <div class="ms-title">First Usher bid submitted</div>
+          <div class="ms-body">Pipeline is live, agents are calling, bids are out. Not earning yet — but the machine is running. This is the gate before revenue.</div>
+        </div>
+      </div>
+      <div class="ms-item">
+        <div class="ms-dot green"></div>
+        <div class="ms-content">
+          <div class="ms-date">July 1 — Hard Deadline</div>
+          <div class="ms-title" style="display:flex;align-items:center;gap:10px;">Usher earns first dollar <div class="ms-amount">First $</div></div>
+          <div class="ms-body">This is the milestone that matters most. One contract, one win — proves the model. Everything else can build from here.</div>
+        </div>
+      </div>
+      <div class="ms-item">
+        <div class="ms-dot blue"></div>
+        <div class="ms-content">
+          <div class="ms-date">July 10–15</div>
+          <div class="ms-title">Class Pulse hits two channels</div>
+          <div class="ms-body">UF submission in. Homeschool marketplace listings live. Summer buying window open — parents are shopping for fall curriculum now.</div>
+        </div>
+      </div>
+      <div class="ms-item">
+        <div class="ms-dot gold"></div>
+        <div class="ms-content">
+          <div class="ms-date">July — Mid Month</div>
+          <div class="ms-title">Ashley's FL exams sat</div>
+          <div class="ms-body">Both exams done. License in process. Opens FL Virtual and MA Virtual applications simultaneously. Two states, two job markets, one credential.</div>
+        </div>
+      </div>
+      <div class="ms-item">
+        <div class="ms-dot gold"></div>
+        <div class="ms-content">
+          <div class="ms-date">August 1</div>
+          <div class="ms-title" style="display:flex;align-items:center;gap:10px;">Move-in funds confirmed <div class="ms-amount">$6–8K</div></div>
+          <div class="ms-body">Between the June 12 deposit, Usher revenue, and Class Pulse — move-in costs ($5,900–$7,400) should be covered before lease signing.</div>
+        </div>
+      </div>
+      <div class="ms-item">
+        <div class="ms-dot green"></div>
+        <div class="ms-content">
+          <div class="ms-date">August — New Lease</div>
+          <div class="ms-title" style="display:flex;align-items:center;gap:10px;">They sign. Together. <div class="ms-amount">Chapter 2</div></div>
+          <div class="ms-body">Licensed. Earning. Job pipelines live. Apartment signed. This is where the summer plan becomes the life they're actually living.</div>
+        </div>
+      </div>
+      <div class="ms-item">
+        <div class="ms-dot dim"></div>
+        <div class="ms-content">
+          <div class="ms-date">Ongoing from August</div>
+          <div class="ms-title">Jordan takes over platform maintenance</div>
+          <div class="ms-body">Low cost for him, high freedom for her. She focuses on bids, domain work, and growth. He keeps the infrastructure running. The split that makes both of them more effective.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="section-label">Birthdays</p>
+    <p class="section-title">Celebrate inside a plan already working</p>
+    <div class="two-col">
+      <div class="card gold-border" style="text-align:center;padding:24px;">
+        <p class="tag gold" style="margin-bottom:10px;">Jordan</p>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:42px;color:var(--gold);font-weight:300;">June 28</p>
+        <p style="font-size:12px;color:var(--dim);margin-top:6px;line-height:1.6;">Usher should be earning by now or days away. Celebrate that something real is already in motion.</p>
+      </div>
+      <div class="card gold-border" style="text-align:center;padding:24px;">
+        <p class="tag" style="margin-bottom:10px;color:var(--rose);">Ashley</p>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:42px;color:var(--gold);font-weight:300;">August 10</p>
+        <p style="font-size:12px;color:var(--dim);margin-top:6px;line-height:1.6;">Licensed. Earning. In a new home. This birthday lands inside the chapter they built together.</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- CALENDAR -->
+<div class="page" id="page-calendar">
+  <section>
+    <p class="section-label">Summer Calendar</p>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:10px;">
+      <p class="section-title" style="margin-bottom:0;" id="cal-heading">June 2026</p>
+      <div style="display:flex;gap:8px;">
+        <button onclick="changeMonth(-1)" style="background:var(--card);border:1px solid var(--border);color:var(--mid);padding:6px 14px;cursor:pointer;font-family:'Space Mono',monospace;font-size:11px;">&#8592; Prev</button>
+        <button onclick="changeMonth(1)" style="background:var(--card);border:1px solid var(--border);color:var(--mid);padding:6px 14px;cursor:pointer;font-family:'Space Mono',monospace;font-size:11px;">Next &#8594;</button>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:2px;">
+      <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;color:var(--dim);text-align:center;padding:6px 0;">SUN</div>
+      <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;color:var(--dim);text-align:center;padding:6px 0;">MON</div>
+      <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;color:var(--dim);text-align:center;padding:6px 0;">TUE</div>
+      <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;color:var(--dim);text-align:center;padding:6px 0;">WED</div>
+      <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;color:var(--dim);text-align:center;padding:6px 0;">THU</div>
+      <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;color:var(--dim);text-align:center;padding:6px 0;">FRI</div>
+      <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;color:var(--dim);text-align:center;padding:6px 0;">SAT</div>
+    </div>
+    <div id="cal-grid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;"></div>
+
+    <div style="margin-top:20px;">
+      <p class="tag gold" style="margin-bottom:12px;">Events this month</p>
+      <div id="cal-event-list"></div>
+    </div>
+
+    <div style="display:flex;flex-wrap:wrap;gap:14px;margin-top:16px;font-size:11px;color:var(--dim);">
+      <span style="display:flex;align-items:center;gap:5px;"><span style="width:8px;height:8px;border-radius:50%;background:var(--red);display:inline-block;"></span>Deadline</span>
+      <span style="display:flex;align-items:center;gap:5px;"><span style="width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block;"></span>Money</span>
+      <span style="display:flex;align-items:center;gap:5px;"><span style="width:8px;height:8px;border-radius:50%;background:var(--gold);display:inline-block;"></span>Milestone</span>
+      <span style="display:flex;align-items:center;gap:5px;"><span style="width:8px;height:8px;border-radius:50%;background:var(--blue);display:inline-block;"></span>Career</span>
+      <span style="display:flex;align-items:center;gap:5px;"><span style="width:8px;height:8px;border-radius:50%;background:var(--purple);display:inline-block;"></span>Birthday</span>
+    </div>
+  </section>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const EVENTS = [
+  { date:'2026-06-05', label:'School ends (Ashley)', color:'var(--gold)', type:'Milestone', detail:"Last day of school. Ashley's bandwidth fully opens. Debugging Usher starts immediately — Jordan guides her through blockers in real-time. The revenue clock is now running." },
+  { date:'2026-06-10', label:'Usher debug done', color:'var(--red)', type:'Deadline', detail:'Platform is stable and ready to bid. Ashley has been building through it — Jordan hands off maintenance from here. The machine is ready to run.' },
+  { date:'2026-06-12', label:'Jordan +$13K deposit', color:'var(--green)', type:'Money', detail:'First major capital event of the summer. $13K lands — this funds the August move-in costs and gives both of them breathing room. FL property pre-approval kicks off the same week.' },
+  { date:'2026-06-14', label:'SAM.gov solicitations identified', color:'var(--red)', type:'Deadline', detail:'At least 3 active gov-con solicitations identified on SAM.gov or equivalent. These are the opportunities Usher bids on. Quality over quantity — Ashley\'s domain knowledge picks the right ones.' },
+  { date:'2026-06-20', label:'Class Pulse debugged', color:'var(--gold)', type:'Milestone', detail:'Class Pulse is stable and ready to send out. UF submission prep begins. Homeschool marketplace listings drafted. Summer buying window is open — parents are shopping for fall curriculum.' },
+  { date:'2026-06-25', label:'First Usher bids submitted', color:'var(--red)', type:'Deadline', detail:'Bids are out the door. Pipeline is live. This is the gate before revenue — the work Ashley put into debugging and identifying solicitations pays off here. Win or learn, either way the system is running.' },
+  { date:'2026-06-28', label:"Jordan's Birthday", color:'var(--purple)', type:'Birthday', detail:"Celebrate. Usher should be earning by now or days away. The summer plan is already in motion — this birthday lands inside something real. Take a breath." },
+  { date:'2026-07-01', label:'Usher earns first dollar', color:'var(--green)', type:'Money', detail:'Hard deadline. This is the milestone that matters most — one contract, one win, proves the model. Ashley\'s runway ends around here so this is the bridge. Everything that comes after builds from this moment.' },
+  { date:'2026-07-10', label:'Class Pulse → UF submission', color:'var(--blue)', type:'Career', detail:'Class Pulse submitted to UF for research opportunities. Ashley\'s education domain knowledge is the asset here — this opens an academic revenue lane alongside the homeschool market.' },
+  { date:'2026-07-15', label:'Class Pulse → Homeschool marketplaces', color:'var(--blue)', type:'Career', detail:'Listings go live on homeschool marketplaces. Summer is peak season — parents are actively shopping for fall. The window closes in September so July is prime time.' },
+  { date:'2026-07-20', label:'FL Exam 1 (Ashley)', color:'var(--blue)', type:'Career', detail:'First FL licensing exam. Fee ~$150. Passing this opens the FL Virtual Schools application and starts the clock on the MA license transfer. Both states, one credential path.' },
+  { date:'2026-07-27', label:'FL Exam 2 (Ashley)', color:'var(--blue)', type:'Career', detail:'Second FL licensing exam. Fee ~$150. Once both exams are passed the license is in process. Ashley is licensed before August — FL Virtual and MA Virtual applications both go in.' },
+  { date:'2026-08-01', label:'Move-in funds confirmed', color:'var(--green)', type:'Money', detail:'Between the June 12 deposit, Usher revenue, and Class Pulse — move-in costs ($5,900–$7,400) should be fully covered before lease signing. This is the financial gate for the apartment.' },
+  { date:'2026-08-10', label:"Ashley's Birthday", color:'var(--purple)', type:'Birthday', detail:"Licensed. Earning. In a new home. This birthday lands inside the chapter they built together over the summer. The plan worked." },
+  { date:'2026-08-15', label:'New lease signed', color:'var(--gold)', type:'Milestone', detail:'Jordan signs the new lease — she\'s in it. BOS or MIA, the decision is already made by now. This is where the summer plan becomes the life they\'re actually living.' },
+  { date:'2026-08-20', label:'MA license transfer filed', color:'var(--blue)', type:'Career', detail:'FL license in hand, MA transfer filed with DESE. Fee ~$100. Opens the MA Virtual Schools lane — licensed in two states means two job markets, maximum optionality.' },
+];
+
+let calYear = 2026, calMonth = 5;
+
+function openDetail(events, dayNum) {
+  const existing = document.getElementById('cal-detail-modal');
+  if (existing) existing.remove();
+  const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const overlay = document.createElement('div');
+  overlay.id = 'cal-detail-modal';
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:200;display:flex;align-items:center;justify-content:center;padding:20px;';
+  overlay.addEventListener('click', e => { if(e.target===overlay) overlay.remove(); });
+  let inner = `<div style="background:#111;border:1px solid #2a2a2a;max-width:460px;width:100%;padding:24px;position:relative;max-height:80vh;overflow-y:auto;">
+    <button onclick="document.getElementById('cal-detail-modal').remove()" style="position:absolute;top:14px;right:14px;background:none;border:none;color:var(--dim);font-size:18px;cursor:pointer;line-height:1;">&#x2715;</button>
+    <p style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--dim);text-transform:uppercase;margin-bottom:6px;">${months[calMonth]} ${dayNum}, ${calYear}</p>`;
+  events.forEach((ev, i) => {
+    inner += `
+    ${i > 0 ? '<div style="border-top:1px solid #1e1e1e;margin:16px 0;"></div>' : ''}
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+      <div style="width:10px;height:10px;border-radius:50%;background:${ev.color};flex-shrink:0;"></div>
+      <span style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--dim);">${ev.type}</span>
+    </div>
+    <p style="font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--cream);font-weight:400;margin-bottom:12px;line-height:1.2;">${ev.label}</p>
+    <p style="font-size:13px;color:var(--mid);line-height:1.8;">${ev.detail || 'No additional details.'}</p>`;
+  });
+  inner += '</div>';
+  overlay.innerHTML = inner;
+  document.body.appendChild(overlay);
+} // 0-indexed, 5 = June
+
+function changeMonth(dir) {
+  calMonth += dir;
+  if (calMonth > 11) { calMonth = 0; calYear++; }
+  if (calMonth < 0) { calMonth = 11; calYear--; }
+  renderCal();
+}
+
+function renderCal() {
+  const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  document.getElementById('cal-heading').textContent = months[calMonth] + ' ' + calYear;
+  const grid = document.getElementById('cal-grid');
+  grid.innerHTML = '';
+  const firstDay = new Date(calYear, calMonth, 1).getDay();
+  const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+  const today = new Date();
+
+  const monthEvents = EVENTS.filter(e => {
+    const d = new Date(e.date);
+    return d.getFullYear() === calYear && d.getMonth() === calMonth;
+  });
+
+  // blank cells
+  for (let i = 0; i < firstDay; i++) {
+    const blank = document.createElement('div');
+    blank.style.cssText = 'min-height:64px;';
+    grid.appendChild(blank);
+  }
+
+  for (let d = 1; d <= daysInMonth; d++) {
+    const cell = document.createElement('div');
+    const isToday = today.getFullYear()===calYear && today.getMonth()===calMonth && today.getDate()===d;
+    const dateStr = calYear+'-'+String(calMonth+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');
+    const dayEvents = monthEvents.filter(e => e.date === dateStr);
+
+    cell.style.cssText = `min-height:64px;background:${isToday?'#1a140a':'var(--card)'};border:1px solid ${isToday?'rgba(184,151,90,0.5)':'var(--border)'};padding:6px 7px;`;
+
+    const num = document.createElement('div');
+    num.textContent = d;
+    num.style.cssText = `font-family:'Space Mono',monospace;font-size:11px;font-weight:700;color:${isToday?'var(--gold)':'var(--dim)'};margin-bottom:4px;`;
+    cell.appendChild(num);
+
+    dayEvents.forEach(ev => {
+      const dot = document.createElement('div');
+      dot.style.cssText = `width:6px;height:6px;border-radius:50%;background:${ev.color};margin-bottom:2px;`;
+      cell.appendChild(dot);
+    });
+
+    if (dayEvents.length > 0) {
+      cell.style.cursor = 'pointer';
+      cell.addEventListener('click', () => openDetail(dayEvents, d));
+      cell.addEventListener('mouseenter', () => { if (!cell.style.borderColor.includes('150,90')) cell.style.borderColor = '#333'; });
+      cell.addEventListener('mouseleave', () => { cell.style.borderColor = isToday ? 'rgba(184,151,90,0.5)' : 'var(--border)'; });
+    }
+
+    grid.appendChild(cell);
+  }
+
+  // Event list
+  const list = document.getElementById('cal-event-list');
+  list.innerHTML = '';
+  if (monthEvents.length === 0) {
+    list.innerHTML = '<p style="font-size:12px;color:var(--dim);">No events this month.</p>';
+    return;
+  }
+  monthEvents.sort((a,b) => a.date.localeCompare(b.date)).forEach(ev => {
+    const d = new Date(ev.date);
+    const dayNum = d.getDate();
+    const dayNames = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    const row = document.createElement('div');
+    row.style.cssText = 'display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid #141414;';
+    row.innerHTML = `
+      <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--dim);min-width:48px;">${dayNames[d.getDay()]} ${dayNum}</div>
+      <div style="width:8px;height:8px;border-radius:50%;background:${ev.color};flex-shrink:0;"></div>
+      <div style="font-size:13px;color:var(--mid);flex:1;">${ev.label}</div>
+      <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;color:var(--dim);text-transform:uppercase;">${ev.type}</div>
+    `;
+    list.appendChild(row);
+  });
+}
+
+renderCal();
+</script>
+<script>
+function showPage(id, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+function toggleCheck(el) {
+  const box = el.querySelector('.check-box');
+  const done = box.classList.toggle('done');
+  el.classList.toggle('done-item', done);
+  box.innerHTML = done ? '<i class="ti ti-check" style="font-size:11px;color:#fff;" aria-hidden="true"></i>' : '';
+}
+
+function updateBudget() {
+  const aExp = parseFloat(document.getElementById('a-expenses').value) || 2200;
+  const aSav = parseFloat(document.getElementById('a-savings').value) || 2200;
+  const jBud = parseFloat(document.getElementById('j-budget').value) || 2000;
+  document.getElementById('a-expenses-display').textContent = '$' + aExp.toLocaleString();
+  document.getElementById('j-budget-display').textContent = '$' + jBud.toLocaleString();
+  const months = Math.round((aSav / aExp) * 10) / 10;
+  document.getElementById('runway-display').textContent = '~' + months + ' mo';
+}
+
+// Days until Aug 1
+const now = new Date();
+const aug1 = new Date('2026-08-01');
+const diff = Math.ceil((aug1 - now) / (1000*60*60*24));
+document.getElementById('days-left').textContent = diff;
+
+// Chart
+const ctx = document.getElementById('budgetChart').getContext('2d');
+new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: ['June', 'July', 'August'],
+    datasets: [
+      { label: 'Revenue', data: [2000, 6500, 8000], backgroundColor: '#6ba888', borderRadius: 3 },
+      { label: 'Expenses', data: [2200, 2500, 8200], backgroundColor: '#b87070', borderRadius: 3 },
+      { label: 'Jordan $13K', data: [13000, 0, 0], backgroundColor: '#6a8fc4', borderRadius: 3 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { ticks: { color: '#777', font: { size: 11 } }, grid: { color: '#1a1a1a' } },
+      y: {
+        ticks: {
+          color: '#777', font: { size: 11 },
+          callback: v => '$' + (v >= 1000 ? (v/1000).toFixed(0)+'K' : v)
+        },
+        grid: { color: '#1a1a1a' }
+      }
+    }
+  }
+});
+</script>
+</body>
+</html>
