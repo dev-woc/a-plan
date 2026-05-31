@@ -286,89 +286,170 @@ section:first-child { margin-top:0; }
 <div class="page" id="page-budget">
 
   <section>
-    <p class="section-label">Budget Tracker</p>
-    <p class="section-title">Cash position &amp; runway</p>
+    <p class="section-label">June Cash Position</p>
+    <p class="section-title">Real numbers, real runway</p>
     <div class="metric-cards">
       <div class="metric">
-        <div class="m-lbl">Ashley — Monthly Expenses</div>
-        <div class="m-val red" id="a-expenses-display">$2,200</div>
-        <div class="m-sub">Rent, food, bills</div>
+        <div class="m-lbl">June Income (Teaching)</div>
+        <div class="m-val green">$7,600</div>
+        <div class="m-sub">$1,900 × 4 — school ends Jun 5</div>
       </div>
       <div class="metric">
-        <div class="m-lbl">Jordan — Monthly Budget</div>
-        <div class="m-val gold" id="j-budget-display">$2,000</div>
-        <div class="m-sub">Lease target</div>
+        <div class="m-lbl">Monthly Burn</div>
+        <div class="m-val red">$3,012</div>
+        <div class="m-sub">Rent, car, food, bills</div>
       </div>
       <div class="metric">
-        <div class="m-lbl">June 12 Deposit</div>
-        <div class="m-val green">$13,000</div>
-        <div class="m-sub">Jordan's incoming</div>
+        <div class="m-lbl">Cash on Hand (Jun 26)</div>
+        <div class="m-val gold">$18,738</div>
+        <div class="m-sub">Incl. Jordan's +$13K</div>
       </div>
       <div class="metric">
-        <div class="m-lbl">Runway (Ashley)</div>
-        <div class="m-val mid" id="runway-display">~1 mo</div>
-        <div class="m-sub">Before Usher must earn</div>
+        <div class="m-lbl">Net Worth</div>
+        <div class="m-val red" style="font-size:15px;">-$17,714</div>
+        <div class="m-sub" style="color:var(--green);">+$1,750 this month ↑</div>
       </div>
     </div>
+  </section>
 
-    <div class="card" style="margin-bottom:20px;">
-      <p class="tag gold" style="margin-bottom:14px;">Adjust Numbers</p>
-      <div class="input-row">
-        <label>Ashley monthly expenses</label>
-        <span class="prefix">$</span>
-        <input type="number" id="a-expenses" value="2200" oninput="updateBudget()">
+  <section>
+    <p class="section-label">Paychecks — June</p>
+    <p class="section-title">Weekly income &amp; spending</p>
+    <div class="card">
+      <div class="budget-row">
+        <div class="b-name">
+          <strong>Jun 5 — Paycheck</strong>
+          <span>Rent $1,650 · Car $250 · Wifi $60 · Food $150 · Gas $60</span>
+        </div>
+        <div class="b-amount" style="color:var(--green);">+$1,900</div>
+        <div class="b-bar-wrap"><div class="b-bar" style="width:100%;background:var(--red);"></div></div>
+        <div class="b-status" style="color:var(--red);">-$270</div>
       </div>
-      <div class="input-row">
-        <label>Ashley savings / runway</label>
-        <span class="prefix">$</span>
-        <input type="number" id="a-savings" value="2200" oninput="updateBudget()">
+      <div class="budget-row">
+        <div class="b-name">
+          <strong>Jun 12 — Paycheck + Jordan +$13K</strong>
+          <span>Car $250 · A247 $1,500 · Food $150 · Gas $70</span>
+        </div>
+        <div class="b-amount" style="color:var(--green);">+$14,900</div>
+        <div class="b-bar-wrap"><div class="b-bar" style="width:13%;background:var(--green);"></div></div>
+        <div class="b-status" style="color:var(--green);">+$12,930</div>
       </div>
-      <div class="input-row">
-        <label>Jordan lease budget / mo</label>
-        <span class="prefix">$</span>
-        <input type="number" id="j-budget" value="2000" oninput="updateBudget()">
+      <div class="budget-row">
+        <div class="b-name">
+          <strong>Jun 19 — Paycheck</strong>
+          <span>Car Note $1,000</span>
+        </div>
+        <div class="b-amount" style="color:var(--green);">+$1,900</div>
+        <div class="b-bar-wrap"><div class="b-bar" style="width:53%;background:var(--gold);"></div></div>
+        <div class="b-status" style="color:var(--green);">+$900</div>
       </div>
-      <div class="input-row">
-        <label>Usher revenue target / mo</label>
-        <span class="prefix">$</span>
-        <input type="number" id="usher-target" value="3000" oninput="updateBudget()">
+      <div class="budget-row">
+        <div class="b-name">
+          <strong>Jun 26 — Paycheck</strong>
+          <span>Car $250 · Food $150 · Gas $60</span>
+        </div>
+        <div class="b-amount" style="color:var(--green);">+$1,900</div>
+        <div class="b-bar-wrap"><div class="b-bar" style="width:24%;background:var(--green);"></div></div>
+        <div class="b-status" style="color:var(--green);">+$1,440</div>
+      </div>
+      <div style="padding:12px 0 0;border-top:1px solid var(--border);margin-top:4px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+        <span style="font-size:13px;color:var(--mid);">June closing balance</span>
+        <span style="font-family:'Space Mono',monospace;font-size:18px;font-weight:700;color:var(--green);">$18,738</span>
       </div>
     </div>
   </section>
 
   <section>
     <p class="section-label">Monthly Expense Breakdown</p>
-    <p class="section-title">Where money goes</p>
+    <p class="section-title">Fixed costs + variable</p>
     <div class="card">
       <div class="budget-row">
-        <div class="b-name"><strong>Rent</strong><span>Ashley's current place</span></div>
-        <div class="b-amount" style="color:var(--red);">$1,200</div>
-        <div class="b-bar-wrap"><div class="b-bar" style="width:55%;background:var(--red);"></div></div>
-        <div class="b-status" style="color:var(--red);">CRITICAL</div>
+        <div class="b-name"><strong>Rent</strong><span>Fixed — current place</span></div>
+        <div class="b-amount" style="color:var(--red);">$1,175</div>
+        <div class="b-bar-wrap"><div class="b-bar" style="width:39%;background:var(--red);"></div></div>
+        <div class="b-status" style="color:var(--dim);">FIXED</div>
       </div>
       <div class="budget-row">
-        <div class="b-name"><strong>Food / Groceries</strong><span>Estimated</span></div>
-        <div class="b-amount" style="color:var(--gold);">$450</div>
-        <div class="b-bar-wrap"><div class="b-bar" style="width:20%;background:var(--gold);"></div></div>
-        <div class="b-status" style="color:var(--gold);">MONTHLY</div>
+        <div class="b-name"><strong>Car Note</strong><span>Fixed monthly payment</span></div>
+        <div class="b-amount" style="color:var(--gold);">$631</div>
+        <div class="b-bar-wrap"><div class="b-bar" style="width:21%;background:var(--gold);"></div></div>
+        <div class="b-status" style="color:var(--dim);">FIXED</div>
       </div>
       <div class="budget-row">
-        <div class="b-name"><strong>Utilities / Phone</strong><span>Estimated</span></div>
-        <div class="b-amount" style="color:var(--gold);">$200</div>
+        <div class="b-name"><strong>Insurance</strong><span>Fixed</span></div>
+        <div class="b-amount" style="color:var(--gold);">$256</div>
         <div class="b-bar-wrap"><div class="b-bar" style="width:9%;background:var(--gold);"></div></div>
-        <div class="b-status" style="color:var(--gold);">MONTHLY</div>
+        <div class="b-status" style="color:var(--dim);">FIXED</div>
       </div>
       <div class="budget-row">
-        <div class="b-name"><strong>FL License Exams</strong><span>2 exams — one-time</span></div>
-        <div class="b-amount" style="color:var(--blue);">$300</div>
-        <div class="b-bar-wrap"><div class="b-bar" style="width:14%;background:var(--blue);"></div></div>
-        <div class="b-status" style="color:var(--blue);">ONE-TIME</div>
+        <div class="b-name"><strong>Food / Groceries</strong><span>Variable</span></div>
+        <div class="b-amount" style="color:var(--sage);">$400</div>
+        <div class="b-bar-wrap"><div class="b-bar" style="width:13%;background:var(--sage);"></div></div>
+        <div class="b-status" style="color:var(--dim);">VAR</div>
       </div>
       <div class="budget-row">
-        <div class="b-name"><strong>Move / Deposit</strong><span>New lease in August</span></div>
-        <div class="b-amount" style="color:var(--purple);">$5,400</div>
-        <div class="b-bar-wrap"><div class="b-bar" style="width:100%;background:var(--purple);"></div></div>
-        <div class="b-status" style="color:var(--purple);">AUG</div>
+        <div class="b-name"><strong>Electric (Duke)</strong><span>Fixed</span></div>
+        <div class="b-amount" style="color:var(--mid);">$200</div>
+        <div class="b-bar-wrap"><div class="b-bar" style="width:7%;background:var(--mid);"></div></div>
+        <div class="b-status" style="color:var(--dim);">FIXED</div>
+      </div>
+      <div class="budget-row">
+        <div class="b-name"><strong>Partner Contrib.</strong><span>Planned transfer</span></div>
+        <div class="b-amount" style="color:var(--rose);">$200</div>
+        <div class="b-bar-wrap"><div class="b-bar" style="width:7%;background:var(--rose);"></div></div>
+        <div class="b-status" style="color:var(--dim);">PLANNED</div>
+      </div>
+      <div class="budget-row">
+        <div class="b-name"><strong>Wifi (Spectrum)</strong><span>Fixed</span></div>
+        <div class="b-amount" style="color:var(--mid);">$60</div>
+        <div class="b-bar-wrap"><div class="b-bar" style="width:2%;background:var(--mid);"></div></div>
+        <div class="b-status" style="color:var(--dim);">FIXED</div>
+      </div>
+      <div class="budget-row">
+        <div class="b-name"><strong>Gas</strong><span>Variable</span></div>
+        <div class="b-amount" style="color:var(--sage);">$90</div>
+        <div class="b-bar-wrap"><div class="b-bar" style="width:3%;background:var(--sage);"></div></div>
+        <div class="b-status" style="color:var(--dim);">VAR</div>
+      </div>
+      <div style="padding:12px 0 0;border-top:1px solid var(--border);margin-top:4px;display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-size:13px;color:var(--mid);">Monthly total</span>
+        <span style="font-family:'Space Mono',monospace;font-size:18px;font-weight:700;color:var(--red);">$3,012</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="section-label">Post-School Runway</p>
+    <p class="section-title">After June — on savings only</p>
+    <div class="card gold-border" style="margin-bottom:14px;">
+      <p style="font-size:13px;color:var(--mid);line-height:1.7;">School ends <strong style="color:var(--cream);">June 5.</strong> After that, teacher income goes to <strong style="color:var(--gold);">$0</strong> unless Usher earns. The $18,738 balance buys time — but the July 1 deadline isn't about running out, it's about building the habit before pressure compounds.</p>
+    </div>
+    <div class="card">
+      <div class="input-row">
+        <label>Cash on hand</label>
+        <span class="prefix">$</span>
+        <input type="number" id="runway-cash" value="18738" oninput="updateRunway()">
+      </div>
+      <div class="input-row">
+        <label>Monthly burn</label>
+        <span class="prefix">$</span>
+        <input type="number" id="runway-burn" value="3012" oninput="updateRunway()">
+      </div>
+      <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--border);">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+          <span style="font-size:13px;color:var(--mid);">Runway without Usher income</span>
+          <span id="runway-months" style="font-family:'Space Mono',monospace;font-size:18px;font-weight:700;color:var(--gold);">6.2 mo</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+          <span style="font-size:13px;color:var(--mid);">Cash hits zero</span>
+          <span id="runway-date" style="font-family:'Space Mono',monospace;font-size:13px;color:var(--dim);">Jan 2027</span>
+        </div>
+        <div class="prog-wrap">
+          <div id="runway-bar" class="prog-fill" style="width:15%;background:var(--green);"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--dim);margin-top:4px;">
+          <span>Now (Jun)</span><span>Jul 1 — Usher must earn</span><span>Zero</span>
+        </div>
       </div>
     </div>
   </section>
@@ -381,8 +462,8 @@ section:first-child { margin-top:0; }
         <canvas id="budgetChart" role="img" aria-label="Bar chart comparing projected revenue vs expenses for June, July, August">Revenue vs expenses projection June through August.</canvas>
       </div>
       <div style="display:flex;gap:16px;margin-top:12px;font-size:12px;color:var(--dim);flex-wrap:wrap;">
-        <span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:2px;background:#6ba888;display:inline-block;"></span>Revenue (Usher + Pulse)</span>
-        <span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:2px;background:#b87070;display:inline-block;"></span>Expenses</span>
+        <span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:2px;background:#6ba888;display:inline-block;"></span>Income + Usher Revenue</span>
+        <span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:2px;background:#b87070;display:inline-block;"></span>Expenses ($3,012/mo)</span>
         <span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:2px;background:#6a8fc4;display:inline-block;"></span>Jordan $13K (June 12)</span>
       </div>
     </div>
@@ -886,14 +967,19 @@ function toggleCheck(el) {
   box.innerHTML = done ? '<i class="ti ti-check" style="font-size:11px;color:#fff;" aria-hidden="true"></i>' : '';
 }
 
-function updateBudget() {
-  const aExp = parseFloat(document.getElementById('a-expenses').value) || 2200;
-  const aSav = parseFloat(document.getElementById('a-savings').value) || 2200;
-  const jBud = parseFloat(document.getElementById('j-budget').value) || 2000;
-  document.getElementById('a-expenses-display').textContent = '$' + aExp.toLocaleString();
-  document.getElementById('j-budget-display').textContent = '$' + jBud.toLocaleString();
-  const months = Math.round((aSav / aExp) * 10) / 10;
-  document.getElementById('runway-display').textContent = '~' + months + ' mo';
+function updateRunway() {
+  const cash = parseFloat(document.getElementById('runway-cash').value) || 18738;
+  const burn = parseFloat(document.getElementById('runway-burn').value) || 3012;
+  const months = Math.round((cash / burn) * 10) / 10;
+  document.getElementById('runway-months').textContent = months + ' mo';
+  const zeroDate = new Date('2026-07-01');
+  zeroDate.setMonth(zeroDate.getMonth() + Math.floor(months));
+  const monthNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  document.getElementById('runway-date').textContent = monthNames[zeroDate.getMonth()] + ' ' + zeroDate.getFullYear();
+  // bar = how much of runway is already "used" (Jun = month 1 of 6.2)
+  const pct = Math.min(Math.round((1 / months) * 100), 100);
+  document.getElementById('runway-bar').style.width = pct + '%';
+  document.getElementById('runway-bar').style.background = pct > 60 ? 'var(--red)' : pct > 30 ? 'var(--gold)' : 'var(--green)';
 }
 
 // Days until Aug 1
@@ -909,8 +995,8 @@ new Chart(ctx, {
   data: {
     labels: ['June', 'July', 'August'],
     datasets: [
-      { label: 'Revenue', data: [2000, 6500, 8000], backgroundColor: '#6ba888', borderRadius: 3 },
-      { label: 'Expenses', data: [2200, 2500, 8200], backgroundColor: '#b87070', borderRadius: 3 },
+      { label: 'Income + Usher', data: [7600, 2000, 6500], backgroundColor: '#6ba888', borderRadius: 3 },
+      { label: 'Expenses', data: [3012, 3012, 3012], backgroundColor: '#b87070', borderRadius: 3 },
       { label: 'Jordan $13K', data: [13000, 0, 0], backgroundColor: '#6a8fc4', borderRadius: 3 }
     ]
   },
