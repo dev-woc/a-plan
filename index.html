@@ -449,6 +449,80 @@ section:first-child { margin-top:0; }
   </section>
 
   <section>
+    <p class="section-label">Debt Snowball — Jordan</p>
+    <p class="section-title">Smallest balance first, roll &amp; repeat</p>
+    <div class="card" style="margin-bottom:14px;">
+      <p class="tag gold" style="margin-bottom:14px;">Your Numbers</p>
+      <div class="input-row">
+        <label>Monthly extra payment</label>
+        <span class="prefix">$</span>
+        <input type="number" id="sb-extra" value="1500" oninput="updateSnowball()">
+      </div>
+      <div class="two-col" style="margin-top:12px;gap:20px;">
+        <div>
+          <p style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:10px;">Car Loan</p>
+          <div class="input-row"><label>Balance</label><span class="prefix">$</span><input type="number" id="sb-car-bal" value="20000" oninput="updateSnowball()"></div>
+          <div class="input-row"><label>Rate (% /yr)</label><input type="number" id="sb-car-rate" value="7" step="0.1" oninput="updateSnowball()" style="width:80px;"><span style="font-size:12px;color:var(--dim);">%</span></div>
+          <div class="input-row"><label>Min payment</label><span class="prefix">$</span><input type="number" id="sb-car-min" value="400" oninput="updateSnowball()"></div>
+        </div>
+        <div>
+          <p style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--blue);text-transform:uppercase;margin-bottom:10px;">Student Loans</p>
+          <div class="input-row"><label>Balance</label><span class="prefix">$</span><input type="number" id="sb-sl-bal" value="30000" oninput="updateSnowball()"></div>
+          <div class="input-row"><label>Rate (% /yr)</label><input type="number" id="sb-sl-rate" value="5" step="0.1" oninput="updateSnowball()" style="width:80px;"><span style="font-size:12px;color:var(--dim);">%</span></div>
+          <div class="input-row"><label>Min payment</label><span class="prefix">$</span><input type="number" id="sb-sl-min" value="300" oninput="updateSnowball()"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div style="margin-bottom:20px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+          <span class="tag gold">1 — Car Loan · Attack first</span>
+          <span id="sb-car-payoff" style="font-family:'Space Mono',monospace;font-size:12px;color:var(--gold);"></span>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--dim);margin-bottom:8px;flex-wrap:wrap;gap:6px;">
+          <span>Balance: <strong id="sb-car-bal-disp" style="color:var(--cream);"></strong></span>
+          <span>Payment: <strong id="sb-car-pmt-disp" style="color:var(--cream);"></strong></span>
+          <span id="sb-car-months" style="color:var(--gold);font-family:'Space Mono',monospace;"></span>
+        </div>
+        <div class="prog-wrap"><div id="sb-car-bar" class="prog-fill" style="width:0%;background:var(--gold);transition:width .5s;"></div></div>
+      </div>
+
+      <div style="text-align:center;padding:6px 0;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--dim);text-transform:uppercase;border-top:1px solid #141414;border-bottom:1px solid #141414;margin-bottom:20px;">
+        car paid → roll full payment into student loans ↓
+      </div>
+
+      <div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+          <span class="tag blue">2 — Student Loans · Snowball target</span>
+          <span id="sb-sl-payoff" style="font-family:'Space Mono',monospace;font-size:12px;color:var(--blue);"></span>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--dim);margin-bottom:8px;flex-wrap:wrap;gap:6px;">
+          <span>Balance: <strong id="sb-sl-bal-disp" style="color:var(--cream);"></strong></span>
+          <span>Payment: <strong id="sb-sl-pmt-disp" style="color:var(--cream);"></strong> after snowball</span>
+          <span id="sb-sl-months" style="color:var(--blue);font-family:'Space Mono',monospace;"></span>
+        </div>
+        <div class="prog-wrap"><div id="sb-sl-bar" class="prog-fill" style="width:0%;background:var(--blue);transition:width .5s;"></div></div>
+      </div>
+
+      <div style="border-top:1px solid var(--border);margin-top:20px;padding-top:16px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;">
+        <div>
+          <div style="font-size:11px;color:var(--dim);margin-bottom:4px;">Total payoff</div>
+          <div id="sb-total-months" style="font-family:'Space Mono',monospace;font-size:16px;font-weight:700;color:var(--green);"></div>
+        </div>
+        <div>
+          <div style="font-size:11px;color:var(--dim);margin-bottom:4px;">Debt-free date</div>
+          <div id="sb-free-date" style="font-family:'Space Mono',monospace;font-size:16px;font-weight:700;color:var(--green);"></div>
+        </div>
+        <div>
+          <div style="font-size:11px;color:var(--dim);margin-bottom:4px;">Interest saved</div>
+          <div id="sb-interest-saved" style="font-family:'Space Mono',monospace;font-size:16px;font-weight:700;color:var(--green);"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
     <p class="section-label">Revenue vs. Expenses</p>
     <p class="section-title">June → August projection</p>
     <div class="card">
@@ -975,6 +1049,84 @@ function updateRunway() {
   document.getElementById('runway-bar').style.width = pct + '%';
   document.getElementById('runway-bar').style.background = pct > 60 ? 'var(--red)' : pct > 30 ? 'var(--gold)' : 'var(--green)';
 }
+
+function sbMonths(principal, monthlyRate, payment) {
+  if (payment <= 0) return 999;
+  if (monthlyRate === 0) return Math.ceil(principal / payment);
+  if (payment <= principal * monthlyRate) return 999;
+  return Math.ceil(-Math.log(1 - (monthlyRate * principal) / payment) / Math.log(1 + monthlyRate));
+}
+
+function sbInterest(principal, monthlyRate, payment, months) {
+  // simulate month by month for accuracy
+  let bal = principal, interest = 0;
+  for (let i = 0; i < months; i++) {
+    const int = bal * monthlyRate;
+    interest += int;
+    bal = bal + int - payment;
+    if (bal <= 0) break;
+  }
+  return Math.max(0, interest);
+}
+
+function sbAddMonths(date, n) {
+  const d = new Date(date); d.setMonth(d.getMonth() + n); return d;
+}
+
+function updateSnowball() {
+  const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const extra = parseFloat(document.getElementById('sb-extra').value) || 0;
+  const car = {
+    bal: parseFloat(document.getElementById('sb-car-bal').value) || 20000,
+    rate: (parseFloat(document.getElementById('sb-car-rate').value) || 7) / 100 / 12,
+    min: parseFloat(document.getElementById('sb-car-min').value) || 400
+  };
+  const sl = {
+    bal: parseFloat(document.getElementById('sb-sl-bal').value) || 30000,
+    rate: (parseFloat(document.getElementById('sb-sl-rate').value) || 5) / 100 / 12,
+    min: parseFloat(document.getElementById('sb-sl-min').value) || 300
+  };
+
+  const carPmt = car.min + extra;
+  const carMos = sbMonths(car.bal, car.rate, carPmt);
+  const carInt = sbInterest(car.bal, car.rate, carPmt, carMos);
+
+  const slPmt = sl.min + carPmt; // full car payment rolls in
+  const slMos = sbMonths(sl.bal, sl.rate, slPmt);
+  const slInt = sbInterest(sl.bal, sl.rate, slPmt, slMos);
+
+  // minimum-only interest for savings calc
+  const carMinMos = sbMonths(car.bal, car.rate, car.min);
+  const carMinInt = sbInterest(car.bal, car.rate, car.min, carMinMos);
+  const slMinMos = sbMonths(sl.bal, sl.rate, sl.min);
+  const slMinInt = sbInterest(sl.bal, sl.rate, sl.min, slMinMos);
+  const saved = Math.round((carMinInt + slMinInt) - (carInt + slInt));
+
+  const start = new Date(2026, 5, 1);
+  const carFree = sbAddMonths(start, carMos);
+  const slFree = sbAddMonths(carFree, slMos);
+
+  const fmt = d => MONTHS[d.getMonth()] + ' ' + d.getFullYear();
+  const fmtUSD = n => '$' + Math.round(n).toLocaleString();
+
+  document.getElementById('sb-car-bal-disp').textContent = fmtUSD(car.bal);
+  document.getElementById('sb-car-pmt-disp').textContent = fmtUSD(carPmt) + '/mo';
+  document.getElementById('sb-car-months').textContent = carMos + ' mo';
+  document.getElementById('sb-car-payoff').textContent = fmt(carFree);
+  document.getElementById('sb-car-bar').style.width = Math.min(100, Math.round(100 / carMos)) + '%';
+
+  document.getElementById('sb-sl-bal-disp').textContent = fmtUSD(sl.bal);
+  document.getElementById('sb-sl-pmt-disp').textContent = fmtUSD(slPmt) + '/mo';
+  document.getElementById('sb-sl-months').textContent = slMos + ' mo';
+  document.getElementById('sb-sl-payoff').textContent = fmt(slFree);
+  document.getElementById('sb-sl-bar').style.width = Math.min(100, Math.round(100 / slMos)) + '%';
+
+  document.getElementById('sb-total-months').textContent = (carMos + slMos) + ' mo';
+  document.getElementById('sb-free-date').textContent = fmt(slFree);
+  document.getElementById('sb-interest-saved').textContent = saved > 0 ? fmtUSD(saved) : '$0';
+}
+
+updateSnowball();
 
 // Days until Aug 1
 const now = new Date();
